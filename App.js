@@ -1,4 +1,4 @@
-export default function App(){
+import { View } from 'react-native';
     return (
         <View style={{flex: 1,}}>
         <View style={{flex: 1, flexDirection: 'row'}}>
