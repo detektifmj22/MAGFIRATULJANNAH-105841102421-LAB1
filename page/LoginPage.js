@@ -1,7 +1,7 @@
 import React from 'react';
 import { Alert, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-const Login = () => {
+const Login = (navigation) => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Login</Text>

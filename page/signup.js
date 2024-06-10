@@ -1,7 +1,15 @@
 import React from 'react';
 import { Alert, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-const SignUp = () => {
+const SignUp = (navigation) => {
+    if (!fontsLoaded) {
+      return (
+        <View>
+          <Text>Font tidak ditemukan!</Text>
+            </View>
+        );
+      }
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Sign Up</Text>
@@ -55,6 +63,9 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     padding: 30,
     backgroundColor: '#F5FCFF',
+    fontFamily: 'Metropolis-Black', 
+    fontSize: 30, 
+    textAlign: 'center'
   },
   
 
