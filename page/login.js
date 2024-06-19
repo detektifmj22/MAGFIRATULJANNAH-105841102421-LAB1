@@ -1,22 +1,36 @@
+import { useFonts } from "expo-font";
 import React from 'react';
 import { Alert, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-const Login = (navigation) => {
+const Login = () => {
+  const [fontsLoaded, fontError] = useFonts({
+    'Metropolis-Bold': require('../assets/font/Metropolis-Bold.otf'),
+    'Metropolis-Medium': require('../assets/font/Metropolis-Medium.otf'),
+  });
+
+  if (!fontsLoaded) {
+    return (
+      <View>
+        <Text>Font tidak ditemukan!</Text>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Login</Text>
+      <Text style={[styles.text, {fontFamily:'Metropolis-Bold'}]}>Login</Text>
     
     <TextInput 
-      style={styles.input} 
+      style={[styles.input, {fontFamily:'Metropolis-Medium'}]} 
       placeholder="Email" 
       keyboardType="email-address"/>
 
     <TextInput 
-      style={styles.input} 
+      style={[styles.input, {fontFamily:'Metropolis-Medium'}]} 
       placeholder="Password" 
-      secureTextEntry/>
+      secureTextEntry= {true}/>
 
-    <Text style={styles.loginPrompt}>Forget your password? <Image
+    <Text style={[styles.loginPrompt, {fontFamily:'Metropolis-Medium'}]}>Forget your password? <Image
           source={require('../assets/image3.png')} 
           style={styles.iconImage3}
         /> </Text>
@@ -24,10 +38,10 @@ const Login = (navigation) => {
     <TouchableOpacity 
       style={styles.button}
       onPress={() => Alert.alert('Login')}>
-      <Text style={styles.buttonText}>LOGIN</Text>
+      <Text style={[styles.buttonText, {fontFamily:'Metropolis-Medium'}]}>LOGIN</Text>
     </TouchableOpacity>
     
-    <Text style={styles.socialText}>Or sign up with social account</Text>
+    <Text style={[styles.socialText, {fontFamily:'Metropolis-Medium'}]}>Or sign up with social account</Text>
     <View style={styles.iconContainer}>
         
     <TouchableOpacity 
@@ -50,35 +64,34 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
-    padding: 30,
+    padding: 20,
     backgroundColor: '#F5FCFF',
   },
   
 
   text: {
-    fontSize: 55,
-    marginTop: 130,
-    fontWeight: 'bold',
+    fontSize: 40,
+    marginTop: 50,
     alignSelf: 'flex-start',
-    marginBottom: 100,
+    marginBottom: 70,
   },
 
   input: {
-    height: 70,
+    height: 50,
     borderColor: 'gray',
     borderWidth: 1,
+    borderRadius:10,
     marginTop: 10,
     paddingHorizontal: 25,
+    paddingVertical: 20,
     width: '100%',
-    borderRadius: 10,
   },
 
   loginPrompt: {
-    fontSize: 25,
+    fontSize: 12,
     alignSelf: 'flex-end',
     paddingVertical: 10,
     marginTop: 10,
-    fontWeight: 'bold',
   },
 
   iconImage3:{
@@ -99,13 +112,12 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#FFFFFF',
     fontSize: 20,
-    fontWeight: 'bold',
   },
   
   socialText: {
-    fontSize: 20,
+    fontSize: 15,
     textAlign: 'center',
-    marginTop: 200,
+    marginTop: 120,
   },
 
   iconContainer: {
