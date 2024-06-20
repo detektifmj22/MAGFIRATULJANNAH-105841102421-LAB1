@@ -1,8 +1,10 @@
+import { useNavigation } from '@react-navigation/native';
 import { useFonts } from "expo-font";
 import React from 'react';
 import { Alert, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 const Login = () => {
+  const navigation = useNavigation();
   const [fontsLoaded, fontError] = useFonts({
     'Metropolis-Bold': require('../assets/font/Metropolis-Bold.otf'),
     'Metropolis-Medium': require('../assets/font/Metropolis-Medium.otf'),
@@ -18,7 +20,13 @@ const Login = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={[styles.text, {fontFamily:'Metropolis-Bold'}]}>Login</Text>
+     <TouchableOpacity
+        onPress={() => navigation.navigate('SignUp')}
+        style={styles.topButtonContainer}>
+        <Image source={require('../assets/image4.png')} style={styles.pindahalaman}/>
+      </TouchableOpacity>
+    
+    <Text style={[styles.text, {fontFamily:'Metropolis-Bold'}]}>Login</Text>
     
     <TextInput 
       style={[styles.input, {fontFamily:'Metropolis-Medium'}]} 
@@ -27,13 +35,14 @@ const Login = () => {
 
     <TextInput 
       style={[styles.input, {fontFamily:'Metropolis-Medium'}]} 
-      placeholder="Password" 
+      placeholder="Password"
       secureTextEntry= {true}/>
 
-    <Text style={[styles.loginPrompt, {fontFamily:'Metropolis-Medium'}]}>Forget your password? <Image
-          source={require('../assets/image3.png')} 
-          style={styles.iconImage3}
-        /> </Text>
+    <Text style={[styles.loginPrompt, { fontFamily: 'Metropolis-Medium' }]}>Forget your password? 
+      <TouchableOpacity onPress={() => navigation.navigate('ForgetPassword')}>
+        <Image source={require('../assets/image3.png')} style={styles.iconImage3} />
+      </TouchableOpacity>
+    </Text>
     
     <TouchableOpacity 
       style={styles.button}
@@ -68,6 +77,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   
+  topButtonContainer: {
+    position: 'absolute',
+    top: 20,
+    left: 15,
+  },
+
+  pindahalaman: {
+    width: 30,
+    height: 20,
+  },
 
   text: {
     fontSize: 40,

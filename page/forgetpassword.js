@@ -1,8 +1,10 @@
+import { useNavigation } from '@react-navigation/native';
 import { useFonts } from "expo-font";
 import React from 'react';
-import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-const ForgotPassword = () => {
+const ForgetPassword = () => {
+  const navigation = useNavigation();
   const [fontsLoaded, fontError] = useFonts({
     'Metropolis-Bold': require('../assets/font/Metropolis-Bold.otf'),
     'Metropolis-Medium': require('../assets/font/Metropolis-Medium.otf'),
@@ -18,7 +20,13 @@ const ForgotPassword = () => {
   
   return (
     <View style={styles.container}>
-      <Text style={[styles.text, {fontFamily:'Metropolis-Bold'}]}>Forgot Password</Text>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Login')}
+        style={styles.topButtonContainer}>
+        <Image source={require('../assets/image4.png')} style={styles.pindahalaman}/>
+      </TouchableOpacity>
+    
+    <Text style={[styles.text, {fontFamily:'Metropolis-Bold'}]}>Forgot Password</Text>
     
     <Text style={[styles.instruction, {fontFamily:'Metropolis-Medium'}]}>Please, enter your email address. You will receive a link to create a new password via email.</Text>
 
@@ -47,6 +55,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   
+  topButtonContainer: {
+    position: 'absolute',
+    top: 20,
+    left: 15,
+  },
+
+  pindahalaman: {
+    width: 30,
+    height: 20,
+  },
 
   text: {
     fontSize: 35,
@@ -94,4 +112,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ForgotPassword;
+export default ForgetPassword;

@@ -1,8 +1,10 @@
+import { useNavigation } from '@react-navigation/native';
 import { useFonts } from "expo-font";
 import React from 'react';
 import { Alert, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 const SignUp = () => {
+  const navigation = useNavigation();
   const [fontsLoaded, fontError] = useFonts({
     'Metropolis-Bold': require('../assets/font/Metropolis-Bold.otf'),
     'Metropolis-Medium': require('../assets/font/Metropolis-Medium.otf'),
@@ -18,7 +20,7 @@ const SignUp = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={[styles.text, {fontFamily:'Metropolis-Bold'}]}>Sign Up</Text>
+    <Text style={[styles.text, {fontFamily:'Metropolis-Bold'}]}>Sign Up</Text>
     
     <TextInput 
       style={[styles.input, {fontFamily:'Metropolis-Medium'}]} 
@@ -34,10 +36,12 @@ const SignUp = () => {
       placeholder="Password" 
       secureTextEntry/>
 
-    <Text style={[styles.loginPrompt, {fontFamily:'Metropolis-Medium'}]}>Already have an account? <Image
-          source={require('../assets/image3.png')} 
-          style={styles.iconImage3}/> </Text>
-    
+    <Text style={[styles.loginPrompt, {fontFamily:'Metropolis-Medium'}]}> Already have an account? 
+      <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+        <Image source={require('../assets/image3.png')} style={styles.iconImage3} />
+      </TouchableOpacity>
+    </Text>
+
     <TouchableOpacity 
       style={styles.button}
       onPress={() => Alert.alert('Sign Up')}>
@@ -70,7 +74,6 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: '#F5FCFF',
   },
-  
 
   text: {
     fontSize: 40,
