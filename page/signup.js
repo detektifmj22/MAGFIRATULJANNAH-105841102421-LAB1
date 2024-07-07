@@ -1,10 +1,28 @@
 import { useNavigation } from '@react-navigation/native';
 import { useFonts } from "expo-font";
-import React from 'react';
+import React, { useState } from 'react';
 import { Alert, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 const SignUp = () => {
+  const [formSingUp, setForm] = useState({
+    username: '',
+    email: '',
+    password: ''
+  });
+
   const navigation = useNavigation();
+
+  const onSubmit = () => {
+    if (formSingUp.username.toLowerCase() === 'magfiratuljannah'
+      && formSingUp.email.toLowerCase() === '105841102421@studet.unismuh.ac.id'
+      && formSingUp.password === 'teknikunismuh') {
+      alert('Login Berhasil');
+      navigation.navigate('MyProfile');
+    } else {
+      alert('Login Gagal');
+    }
+  };
+
   const [fontsLoaded, fontError] = useFonts({
     'Metropolis-Bold': require('../assets/font/Metropolis-Bold.otf'),
     'Metropolis-Medium': require('../assets/font/Metropolis-Medium.otf'),
@@ -20,48 +38,55 @@ const SignUp = () => {
 
   return (
     <View style={styles.container}>
-    <Text style={[styles.text, {fontFamily:'Metropolis-Bold'}]}>Sign Up</Text>
-    
-    <TextInput 
-      style={[styles.input, {fontFamily:'Metropolis-Medium'}]} 
-      placeholder="Name"/>
+      <Text style={[styles.text, {fontFamily:'Metropolis-Bold'}]}>Sign Up</Text>
       
-    <TextInput 
-      style={[styles.input, {fontFamily:'Metropolis-Medium'}]} 
-      placeholder="Email" 
-      keyboardType="email-address"/>
+      <TextInput 
+        style={[styles.input, {fontFamily:'Metropolis-Medium'}]} 
+        placeholder="Name"
+        onChangeText={(hasil) => setForm({ ...formSingUp, username: hasil })}
+        value={formSingUp.username}
+      />
 
-    <TextInput 
-      style={[styles.input, {fontFamily:'Metropolis-Medium'}]} 
-      placeholder="Password" 
-      secureTextEntry/>
+      <TextInput 
+        style={[styles.input, {fontFamily:'Metropolis-Medium'}]} 
+        placeholder="Email" 
+        keyboardType="email-address"
+        onChangeText={(hasil) => setForm({ ...formSingUp, email: hasil })}
+        value={formSingUp.email}/>
 
-    <Text style={[styles.loginPrompt, {fontFamily:'Metropolis-Medium'}]}> Already have an account? 
-      <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-        <Image source={require('../assets/image3.png')} style={styles.iconImage3} />
+      <TextInput 
+        style={[styles.input, {fontFamily:'Metropolis-Medium'}]} 
+        placeholder="Password" 
+        secureTextEntry
+        onChangeText={(hasil) => setForm({ ...formSingUp, password: hasil })}
+        value={formSingUp.password}/>
+
+      <Text style={[styles.loginPrompt, {fontFamily:'Metropolis-Medium'}]}> Already have an account? 
+        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+          <Image source={require('../assets/image3.png')} style={styles.iconImage3} />
+        </TouchableOpacity>
+      </Text>
+
+      <TouchableOpacity 
+        style={styles.button}
+        onPress={onSubmit}>
+        <Text style={[styles.buttonText, {fontFamily:'Metropolis-Medium'}]}>SIGN UP</Text>
       </TouchableOpacity>
-    </Text>
-
-    <TouchableOpacity 
-      style={styles.button}
-      onPress={() => Alert.alert('Sign Up')}>
-      <Text style={[styles.buttonText, {fontFamily:'Metropolis-Medium'}]}>SIGN UP</Text>
-    </TouchableOpacity>
-    
-    <Text style={[styles.socialText, {fontFamily:'Metropolis-Medium'}]}>Or sign up with social account</Text>
-    <View style={styles.iconContainer}>
+      
+      <Text style={[styles.socialText, {fontFamily:'Metropolis-Medium'}]}>Or sign up with social account</Text>
+      <View style={styles.iconContainer}>
         
-    <TouchableOpacity 
-      onPress={() => Alert.alert()}>
-      <Image
-      source={require('../assets/image2.png')}
-      style={styles.iconImage}/>
-    </TouchableOpacity>
-      <Image
-      source={require('../assets/image1.png')}
-      style={styles.iconImage}/>
+        <TouchableOpacity 
+          onPress={() => Alert.alert()}>
+          <Image
+            source={require('../assets/image2.png')}
+            style={styles.iconImage}/>
+        </TouchableOpacity>
+        <Image
+          source={require('../assets/image1.png')}
+          style={styles.iconImage}/>
         
-    </View>
+      </View>
     </View>
   );
 };

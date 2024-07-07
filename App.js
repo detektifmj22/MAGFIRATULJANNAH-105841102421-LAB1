@@ -1,37 +1,24 @@
-import React, { useEffect, useState } from 'react'
-import { Text, View } from 'react-native'
-const App = () => {
-  const [users, setUsers] = useState([])
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import * as React from 'react';
+import ForgetPassword from './page/forgetpassword';
+import Login from './page/login';
+import MyProfile from './page/profil';
+import SignUp from './page/signup';
 
-  useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then((response) => response.json())
-      .then((json) => setUsers(json))
-  }, [])
+const Stack = createStackNavigator();
+
+const App = () => {
   return (
-    <View style={{
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: 10
-    }}>
-      <Text>Daftar User</Text>
-      {users.map((user) => (
-        <View
-          style={{
-            borderWidth: 1,
-            borderColor: 'black',
-            padding: 20,
-            margin: 5
-          }}
-          key={user.id}>
-          <Text>Nama: {user.name}</Text>
-          <Text>Username: {user.username}</Text>
-          <Text>Email: {user.email}</Text>
-          <Text>Street :{user?.address?.street}</Text>
-        </View>
-      ))}
-    </View>
-  )
-}
-export default App
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="SignUp">
+        <Stack.Screen name="SignUp" component={SignUp} options={{ headerShown: false }} />
+        <Stack.Screen name="MyProfile" component={MyProfile} options={{ headerShown: false }} />
+        <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+        <Stack.Screen name="ForgetPassword" component={ForgetPassword} options={{ headerShown: false }}/>
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+export default App;
